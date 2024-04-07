@@ -7,17 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0478AE2C2BC19E9C00CE6567 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0478AE2B2BC19E9C00CE6567 /* Assets.xcassets */; };
 		04B200032BBD35FC005F395C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B200022BBD35FC005F395C /* LoginViewController.swift */; };
 		04B200052BBD3E79005F395C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B200042BBD3E79005F395C /* Extension.swift */; };
 		04B2FFE72BBD14C3005F395C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2FFE62BBD14C3005F395C /* AppDelegate.swift */; };
 		04B2FFE92BBD14C3005F395C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2FFE82BBD14C3005F395C /* SceneDelegate.swift */; };
 		04B2FFEE2BBD14C3005F395C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B2FFEC2BBD14C3005F395C /* Main.storyboard */; };
 		04B2FFF12BBD14C3005F395C /* Uber_Clone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04B2FFEF2BBD14C3005F395C /* Uber_Clone.xcdatamodeld */; };
-		04B2FFF32BBD14C8005F395C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B2FFF22BBD14C8005F395C /* Assets.xcassets */; };
 		04B2FFF62BBD14C8005F395C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B2FFF42BBD14C8005F395C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0478AE2B2BC19E9C00CE6567 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04B200022BBD35FC005F395C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		04B200042BBD3E79005F395C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		04B2FFE32BBD14C3005F395C /* Uber Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -25,7 +26,6 @@
 		04B2FFE82BBD14C3005F395C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		04B2FFED2BBD14C3005F395C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04B2FFF02BBD14C3005F395C /* Uber_Clone.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Uber_Clone.xcdatamodel; sourceTree = "<group>"; };
-		04B2FFF22BBD14C8005F395C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04B2FFF52BBD14C8005F395C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04B2FFF72BBD14C8005F395C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,8 +83,8 @@
 				04B2FFFF2BBD1F0E005F395C /* Controllers */,
 				04B200012BBD34E2005F395C /* Services */,
 				04B200002BBD1F16005F395C /* Utils */,
-				04B2FFF22BBD14C8005F395C /* Assets.xcassets */,
 				04B2FFF42BBD14C8005F395C /* LaunchScreen.storyboard */,
+				0478AE2B2BC19E9C00CE6567 /* Assets.xcassets */,
 				04B2FFF72BBD14C8005F395C /* Info.plist */,
 				04B2FFEF2BBD14C3005F395C /* Uber_Clone.xcdatamodeld */,
 			);
@@ -172,7 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B2FFF62BBD14C8005F395C /* LaunchScreen.storyboard in Resources */,
-				04B2FFF32BBD14C8005F395C /* Assets.xcassets in Resources */,
+				0478AE2C2BC19E9C00CE6567 /* Assets.xcassets in Resources */,
 				04B2FFEE2BBD14C3005F395C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
