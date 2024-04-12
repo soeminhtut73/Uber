@@ -14,25 +14,37 @@ extension UIColor {
 //MARK: - UIView Extension
 extension UIView {
     
-    func inputContainerView(image: String, textField: UITextField) -> UIView {
+    func inputContainerView(image: String, textField: UITextField? = nil, accountTypeControl: UISegmentedControl? = nil) -> UIView {
         let view = UIView()
-        view.anchor(height: 50)
         
         let imageView = UIImageView()
         view.addSubview(imageView)
         imageView.image = UIImage(imageLiteralResourceName: image)
         imageView.alpha = 0.8
-        imageView.centerY(inView: view)
-        imageView.anchor(left: view.leftAnchor, paddingLeft: 10, width: 26, height: 26)
         
-        view.addSubview(textField)
-        textField.centerY(inView: view)
-        textField.anchor(left: imageView.rightAnchor, right: view.rightAnchor, paddingLeft: 6, paddingRight: 6, height: 26)
+        
+        if let textField = textField {
+            imageView.centerY(inView: view)
+            imageView.anchor(left: view.leftAnchor, paddingLeft: 10, width: 26, height: 26)
+            
+            view.addSubview(textField)
+            textField.centerY(inView: view)
+            textField.anchor(left: imageView.rightAnchor, right: view.rightAnchor, paddingLeft: 6, paddingRight: 6, height: 26)
+        }
+        
+        if let accountTypeControl = accountTypeControl {
+            
+            imageView.anchor(top: view.topAnchor, left: view.leftAnchor, paddingLeft: 8, width: 24, height: 24)
+            
+            view.addSubview(accountTypeControl)
+            accountTypeControl.centerX(inView: view)
+            accountTypeControl.anchor(top: imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8)
+        }
         
         let separatorView = UIView()
         view.addSubview(separatorView)
         separatorView.backgroundColor = .lightGray
-        separatorView.anchor(left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, paddingLeft: 10, height: 0.75)
+        separatorView.anchor(left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, paddingLeft: 10, paddingRight: 10, height: 0.75)
         
         return view
     }

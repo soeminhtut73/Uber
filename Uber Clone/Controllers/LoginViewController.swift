@@ -3,6 +3,7 @@ import UIKit
 class LoginViewController: UIViewController {
     
     //MARK: - Properites
+    
     private let titleLable: UILabel = {
         let label = UILabel()
         label.text = "UBER"
@@ -49,7 +50,7 @@ class LoginViewController: UIViewController {
     
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
-        let title = NSMutableAttributedString(string: "Don't Have An Account? ", attributes: [
+        let attributedTitle = NSMutableAttributedString(string: "Don't Have An Account? ", attributes: [
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16),
             NSAttributedString.Key.foregroundColor : UIColor.lightGray
         ])
@@ -59,15 +60,39 @@ class LoginViewController: UIViewController {
             NSAttributedString.Key.foregroundColor : UIColor.mainBlueTint
         ])
         
-        title.append(signUpTitle)
-        button.setAttributedTitle(title, for: .normal)
+        attributedTitle.append(signUpTitle)
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         
         return button
     }()
     
     //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureUI()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    //MARK: - Selector
+    
+    @objc func handleShowSignUp() {
+        let vc = SignUpViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    //MARK: - Helper Functions
+    
+    private func configureUI() {
+        
+//        configureNavigationBar()
+        
         view.backgroundColor = UIColor.backgroundColor
         
         /// title lable layout
@@ -93,7 +118,6 @@ class LoginViewController: UIViewController {
         signUpButton.centerX(inView: view)
         signUpButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor,paddingBottom: 30)
         
-        
         /*
         /// email container layout
         view.addSubview(emailContainerView)
@@ -103,12 +127,10 @@ class LoginViewController: UIViewController {
         view.addSubview(passwordContainerView)
         passwordContainerView.anchor(top: emailTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 15, paddingRight: 15, height: 50)
          */
-        
-        
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    private func configureNavigationBar() {
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.barStyle = .black
     }
-
 }

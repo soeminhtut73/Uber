@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0478AE2C2BC19E9C00CE6567 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0478AE2B2BC19E9C00CE6567 /* Assets.xcassets */; };
+		0478AE302BC4395100CE6567 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0478AE2F2BC4395100CE6567 /* SignUpViewController.swift */; };
 		04B200032BBD35FC005F395C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B200022BBD35FC005F395C /* LoginViewController.swift */; };
 		04B200052BBD3E79005F395C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B200042BBD3E79005F395C /* Extension.swift */; };
 		04B2FFE72BBD14C3005F395C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2FFE62BBD14C3005F395C /* AppDelegate.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		0478AE2B2BC19E9C00CE6567 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0478AE2F2BC4395100CE6567 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		04B200022BBD35FC005F395C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		04B200042BBD3E79005F395C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		04B2FFE32BBD14C3005F395C /* Uber Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Uber Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +79,6 @@
 			children = (
 				04B2FFE62BBD14C3005F395C /* AppDelegate.swift */,
 				04B2FFE82BBD14C3005F395C /* SceneDelegate.swift */,
-				04B2FFEC2BBD14C3005F395C /* Main.storyboard */,
 				04B2FFFD2BBD1EF9005F395C /* Models */,
 				04B2FFFE2BBD1F04005F395C /* Views */,
 				04B2FFFF2BBD1F0E005F395C /* Controllers */,
@@ -101,6 +102,7 @@
 		04B2FFFE2BBD1F04005F395C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04B2FFEC2BBD14C3005F395C /* Main.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				04B200022BBD35FC005F395C /* LoginViewController.swift */,
+				0478AE2F2BC4395100CE6567 /* SignUpViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0478AE302BC4395100CE6567 /* SignUpViewController.swift in Sources */,
 				04B200052BBD3E79005F395C /* Extension.swift in Sources */,
 				04B200032BBD35FC005F395C /* LoginViewController.swift in Sources */,
 				04B2FFF12BBD14C3005F395C /* Uber_Clone.xcdatamodeld in Sources */,
