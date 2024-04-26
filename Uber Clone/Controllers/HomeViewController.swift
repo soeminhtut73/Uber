@@ -10,7 +10,9 @@ class HomeViewController: UIViewController {
     
     private let locationManager = CLLocationManager()
     
-    private let locationInputIndicatorView = LocationInputIndicatorView()
+    private let locationInputActivationView = LocationInputActivationView()
+    
+    private let locationInputView = LocationInputView()
     
     //MARK: - lifecycle
     
@@ -26,20 +28,40 @@ class HomeViewController: UIViewController {
     
     //MARK: - Helper Functions
     private func configureUI() {
-        configureLocation()
+        configureMapView()
         
-        view.addSubview(locationInputIndicatorView)
-        locationInputIndicatorView.centerX(inView: view)
-        locationInputIndicatorView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
-        locationInputIndicatorView.dimension(width: view.frame.width - 64, height: 50)
+        view.addSubview(locationInputActivationView)
+        locationInputActivationView.centerX(inView: view)
+        locationInputActivationView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        locationInputActivationView.dimension(width: view.frame.width - 64, height: 50)
+        locationInputActivationView.alpha = 0
+        locationInputActivationView.delegate = self
+        
+        UIView.animate(withDuration: 1) {
+            self.locationInputActivationView.alpha = 1
+        }
     }
     
-    private func configureLocation() {
+    private func configureMapView() {
         view.addSubview(mapView)
         mapView.frame = view.bounds
         
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
+    }
+    
+    private func configureLocationInputView() {
+        view.addSubview(locationInputView)
+        locationInputView.delegate = self
+        locationInputView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 200)
+        locationInputView.alpha = 0
+        
+        UIView.animate(withDuration: 0.5) {
+            self.locationInputView.alpha = 1
+        } completion: { _ in
+            print("DEBUG: Location input view got appear!")
+        }
+
     }
     
 }
@@ -75,5 +97,25 @@ extension HomeViewController: CLLocationManagerDelegate {
                 self.locationManager.requestAlwaysAuthorization()
             }
         }
+    }
+}
+
+extension HomeViewController: LocationInputActivationViewDelegate {
+    func presentLocationInputActivationViewTap() {
+        locationInputActivationView.alpha = 0
+        configureLocationInputView()
+    }
+}
+
+extension HomeViewController: LocationInputViewDelegate {
+    func presentBackButtonGotTap() {
+        UIView.animate(withDuration: 0.3) {
+            self.locationInputView.alpha = 0
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.locationInputActivationView.alpha = 1
+            }
+        }
+
     }
 }

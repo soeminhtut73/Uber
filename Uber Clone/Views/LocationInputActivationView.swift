@@ -1,12 +1,12 @@
 import UIKit
-protocol LocationInputIndicatorViewDelegate {
-    func presentlocationInputIndicatorViewTap()
+protocol LocationInputActivationViewDelegate {
+    func presentLocationInputActivationViewTap()
 }
 
 class LocationInputActivationView: UIView {
     
     //MARK: - Properties
-    var delegate : LocationInputIndicatorViewDelegate?
+    var delegate : LocationInputActivationViewDelegate?
     
     private let indicatorView: UIView = {
         let view = UIView()
@@ -39,7 +39,7 @@ class LocationInputActivationView: UIView {
         placeholderLable.centerY(inView: self)
         placeholderLable.anchor(left: indicatorView.rightAnchor, paddingLeft: 20)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(locationInputIndicatorViewTap))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(LocationInputActivationViewTap))
         addGestureRecognizer(tap)
     }
     
@@ -49,8 +49,8 @@ class LocationInputActivationView: UIView {
     
     //MARK: - Selectors
     
-    @objc func locationInputIndicatorViewTap() {
-        delegate?.presentlocationInputIndicatorViewTap()
+    @objc func LocationInputActivationViewTap() {
+        delegate?.presentLocationInputActivationViewTap()
     }
     
 }
