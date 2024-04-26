@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -7,7 +8,7 @@ class LoginViewController: UIViewController {
     private let titleLable: UILabel = {
         let label = UILabel()
         label.text = "UBER"
-        label.font = UIFont(name: "Avenir-Light", size: 36)
+        label.font = UIFont(name: "Avenir-Light", size: 31)
         label.textColor = UIColor(white: 1, alpha: 0.8)
         return label
         
@@ -38,13 +39,9 @@ class LoginViewController: UIViewController {
     }()
     
     private let loginButton: UIButton = {
-        let button = UIButton()
+        let button = AuthButton()
         button.setTitle("Login", for: .normal)
-        button.setTitleColor(UIColor.label, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = .mainBlueTint
-        button.layer.cornerRadius = 5
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
         return button
     }()
     
@@ -72,8 +69,13 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureNavigationBar()
         configureUI()
+//        signOut()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        checkUserLogin()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -87,11 +89,25 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func handleLoginButton() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        print("got login btn tap")
+        
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print("Debug: Error login with \(error.localizedDescription)")
+                return
+            }
+            print("Successfully Login User")
+            self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            
+        }
+    }
+    
     //MARK: - Helper Functions
     
     private func configureUI() {
-        
-//        configureNavigationBar()
         
         view.backgroundColor = UIColor.backgroundColor
         
@@ -104,19 +120,19 @@ class LoginViewController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, loginButton])
         stackView.distribution = .fillEqually
         stackView.axis = .vertical
-        stackView.spacing = 24
+        stackView.spacing = 15
         view.addSubview(stackView)
         stackView.anchor(top: titleLable.bottomAnchor,
                          left: view.leftAnchor,
                          right: view.rightAnchor,
-                         paddingTop: 40,
+                         paddingTop: 10,
                          paddingLeft: 16,
                          paddingRight: 16)
         
         /// signup button layout
         view.addSubview(signUpButton)
         signUpButton.centerX(inView: view)
-        signUpButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor,paddingBottom: 30)
+        signUpButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor,paddingBottom: 10)
         
         /*
         /// email container layout
@@ -132,5 +148,22 @@ class LoginViewController: UIViewController {
     private func configureNavigationBar() {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
+    }
+    
+    private func checkUserLogin() {
+        if Auth.auth().currentUser == nil {
+            print("User not login")
+        } else {
+            print("User login.")
+            navigationController?.pushViewController(HomeViewController(), animated: true)
+        }
+    }
+    
+    private func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Debug: Fail to Sign out \(error.localizedDescription)")
+        }
     }
 }

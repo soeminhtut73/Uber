@@ -22,7 +22,6 @@ extension UIView {
         imageView.image = UIImage(imageLiteralResourceName: image)
         imageView.alpha = 0.8
         
-        
         if let textField = textField {
             imageView.centerY(inView: view)
             imageView.anchor(left: view.leftAnchor, paddingLeft: 10, width: 26, height: 26)
@@ -34,17 +33,17 @@ extension UIView {
         
         if let accountTypeControl = accountTypeControl {
             
-            imageView.anchor(top: view.topAnchor, left: view.leftAnchor, paddingLeft: 8, width: 24, height: 24)
+            imageView.anchor(top: view.topAnchor, left: view.leftAnchor,paddingTop: -5, paddingLeft: 8, width: 24, height: 24)
             
             view.addSubview(accountTypeControl)
             accountTypeControl.centerX(inView: view)
-            accountTypeControl.anchor(top: imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8)
+            accountTypeControl.anchor(top: imageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 10)
         }
         
         let separatorView = UIView()
         view.addSubview(separatorView)
         separatorView.backgroundColor = .lightGray
-        separatorView.anchor(left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, paddingLeft: 10, paddingRight: 10, height: 0.75)
+        separatorView.anchor(left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, paddingLeft: 10, paddingRight: 10,paddingBottom: 5, height: 0.75)
         
         return view
     }
@@ -92,8 +91,22 @@ extension UIView {
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    func centerY(inView view: UIView) {
-        centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    func centerY(inView view: UIView,
+                 left: NSLayoutXAxisAnchor? = nil,
+                 paddingLeft:CGFloat = 0,
+                 constant: CGFloat = 0) {
+        
+        centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant).isActive = true
+        
+        if let left = left {
+            leftAnchor.constraint(equalTo: left, constant: paddingLeft).isActive = true
+        }
+    }
+    
+    func dimension(width: CGFloat, height: CGFloat) {
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalToConstant: width).isActive = true
+        heightAnchor.constraint(equalToConstant: height).isActive = true
     }
     
 }
@@ -103,7 +116,7 @@ extension UITextField {
     
     func textField(withPlaceholder placeholder: String, isSecureTextEntry: Bool) -> UITextField {
         let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.font = UIFont.systemFont(ofSize: 14)
         textField.borderStyle = .none
         textField.isSecureTextEntry = isSecureTextEntry
         textField.textColor = UIColor.label
