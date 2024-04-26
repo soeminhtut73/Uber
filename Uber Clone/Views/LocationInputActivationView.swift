@@ -1,8 +1,13 @@
 import UIKit
+protocol LocationInputIndicatorViewDelegate {
+    func presentlocationInputIndicatorViewTap()
+}
 
-class LocationInputIndicatorView: UIView {
+class LocationInputActivationView: UIView {
     
     //MARK: - Properties
+    var delegate : LocationInputIndicatorViewDelegate?
+    
     private let indicatorView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -20,24 +25,32 @@ class LocationInputIndicatorView: UIView {
     //MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         backgroundColor = .white
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
-        layer.shadowOpacity = 0.5
-        layer.masksToBounds = false
+        
+        addShadow()
         
         addSubview(indicatorView)
         indicatorView.centerY(inView: self, left: leftAnchor, paddingLeft: 16)
         indicatorView.dimension(width: 6, height: 6)
+        indicatorView.layer.cornerRadius = 6/2
         
         addSubview(placeholderLable)
         placeholderLable.centerY(inView: self)
         placeholderLable.anchor(left: indicatorView.rightAnchor, paddingLeft: 20)
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(locationInputIndicatorViewTap))
+        addGestureRecognizer(tap)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: - Selectors
+    
+    @objc func locationInputIndicatorViewTap() {
+        delegate?.presentlocationInputIndicatorViewTap()
     }
     
 }

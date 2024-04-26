@@ -41,7 +41,7 @@ class HomeViewController: UIViewController {
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
     }
-
+    
 }
 
 //MARK: - Location Services
@@ -68,11 +68,12 @@ extension HomeViewController: CLLocationManagerDelegate {
                 }
             }
         }
-    
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .authorizedWhenInUse {
-            self.locationManager.requestAlwaysAuthorization()
+        
+        
+        func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+            if manager.authorizationStatus == .authorizedWhenInUse {
+                self.locationManager.requestAlwaysAuthorization()
+            }
         }
     }
 }

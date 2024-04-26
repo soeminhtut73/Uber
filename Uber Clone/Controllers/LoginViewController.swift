@@ -71,6 +71,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureUI()
+        checkUserLogin()
 //        signOut()
     }
     
