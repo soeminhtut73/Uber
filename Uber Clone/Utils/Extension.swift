@@ -88,6 +88,7 @@ extension UIView {
     }
     
     func centerX(inView view: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
@@ -95,6 +96,8 @@ extension UIView {
                  left: NSLayoutXAxisAnchor? = nil,
                  paddingLeft:CGFloat = 0,
                  constant: CGFloat = 0) {
+        
+        translatesAutoresizingMaskIntoConstraints = false
         
         centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant).isActive = true
         
