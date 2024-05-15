@@ -69,14 +69,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkUserLogin()
         configureNavigationBar()
-        configureUI()
-        checkUserLogin()
 //        signOut()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        checkUserLogin()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -156,6 +151,8 @@ class LoginViewController: UIViewController {
             print("User not login")
         } else {
             print("User login.")
+            
+            configureUI()
             navigationController?.pushViewController(HomeViewController(), animated: true)
         }
     }
@@ -163,8 +160,9 @@ class LoginViewController: UIViewController {
     private func signOut() {
         do {
             try Auth.auth().signOut()
+            print("DEBUG: Signout success!")
         } catch {
-            print("Debug: Fail to Sign out \(error.localizedDescription)")
+            print("DEBUG: Fail to Sign out \(error.localizedDescription)")
         }
     }
 }

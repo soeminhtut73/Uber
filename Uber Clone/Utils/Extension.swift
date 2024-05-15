@@ -129,8 +129,8 @@ extension UITextField {
         textField.font = UIFont.systemFont(ofSize: 14)
         textField.borderStyle = .none
         textField.isSecureTextEntry = isSecureTextEntry
-        textField.textColor = UIColor.label
-        textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor.secondaryLabel])
+        textField.textColor = .white
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
         return textField
         
     }

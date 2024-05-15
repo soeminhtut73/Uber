@@ -1,5 +1,6 @@
 import UIKit
 import Firebase
+import GeoFire
 
 class SignUpViewController: UIViewController {
     
@@ -119,21 +120,40 @@ class SignUpViewController: UIViewController {
                            "fullname": username,
                            "accountType": accountTypeIndex] as [String : Any]
             
-            Database.database().reference().child("users").child(uId).updateChildValues(values) { error, ref in
-                if let error = error {
-                    print("Fail to create user database \(error)")
-                    return
+            if accountTypeIndex == 1 {
+                let locationManager = LocationHandler.shared.locationManager
+                let location = locationManager?.location
+                
+                guard let location = location else { return }
+                
+                let geoFire = GeoFire(firebaseRef: REF_DRIVER_LOCATION)
+                
+                // create driver-locations
+                geoFire.setLocation(location, forKey: uId) { error in
+                    guard error == nil else { return }
+//                    self.createUserData(uId: uId, values: values)
                 }
-
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(HomeViewController(), animated: true)
-                }
-                print("Sign Up Success")
             }
+            
+            self.createUserData(uId: uId, values: values)
+            
+            self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            
+            print("Sign Up Success")
+            
         }
     }
     
     //MARK: - HelperFunctions
+    private func createUserData(uId: String, values: [String: Any]) {
+        REF_USER.child(uId).updateChildValues(values) { error, ref in
+            if let error = error {
+                print("Fail to create user database \(error)")
+                return
+            }
+        }
+    }
+    
     private func configureNavigationBar() {
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
