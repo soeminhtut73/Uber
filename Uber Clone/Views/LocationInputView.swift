@@ -1,6 +1,8 @@
 import UIKit
+
 protocol LocationInputViewDelegate {
     func presentBackButtonGotTap()
+    func executeQuery(query: String)
 }
 
 class LocationInputView: UIView {
@@ -57,14 +59,16 @@ class LocationInputView: UIView {
         return tf
     }()
     
-    private let destinationLocationInputTextField: UITextField = {
+    private lazy var destinationLocationInputTextField: UITextField = {
         let tf = UITextField()
+        
         tf.placeholder = "Select destination"
         tf.font = UIFont.systemFont(ofSize: 14)
         tf.backgroundColor = .lightGray
         tf.returnKeyType = .search
         tf.leftViewMode = .always
         tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0))
+        tf.delegate = self
         return tf
     }()
     
@@ -111,6 +115,14 @@ class LocationInputView: UIView {
         self.delegate?.presentBackButtonGotTap()
     }
     
+}
+
+extension LocationInputView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let query = textField.text else { return false }
+        delegate?.executeQuery(query: query)
+        return true
+    }
 }
 
 

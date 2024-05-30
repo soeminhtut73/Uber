@@ -23,7 +23,9 @@ struct Service {
         REF_DRIVER_LOCATION.observe(.value) { snapshot in
             geoFire.query(at: location, withRadius: 50).observe(.keyEntered, with: { uID, location in
                 
-                /* Driver uID got return */
+                /* 
+                  -  Driver uID got return
+                 */
                 self.fetchUser(uID: uID) { user in
                     var driver = user
                     driver.location = location

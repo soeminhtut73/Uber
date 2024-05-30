@@ -1,5 +1,5 @@
 import UIKit
-
+import MapKit
 //MARK: - UIColor Extension
 extension UIColor {
     
@@ -136,3 +136,15 @@ extension UITextField {
     }
 }
 
+//MARK: - Mapkit Extionsion
+extension MKPlacemark {
+    var address: String {
+        get {
+            guard let subThoroughfare = subThoroughfare else { return "" }
+            guard let thoroughfare = thoroughfare else { return "" }
+            guard let locality = locality else { return "" }
+            guard let administrativeArea = administrativeArea else { return "" }
+            return "\(subThoroughfare) \(thoroughfare), \(locality), \(administrativeArea)"
+        }
+    }
+}

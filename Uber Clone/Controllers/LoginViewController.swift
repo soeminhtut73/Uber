@@ -149,10 +149,9 @@ class LoginViewController: UIViewController {
     private func checkUserLogin() {
         if Auth.auth().currentUser == nil {
             print("User not login")
+            configureUI()
         } else {
             print("User login.")
-            
-            configureUI()
             navigationController?.pushViewController(HomeViewController(), animated: true)
         }
     }
