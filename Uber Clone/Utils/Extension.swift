@@ -1,5 +1,6 @@
 import UIKit
 import MapKit
+
 //MARK: - UIColor Extension
 extension UIColor {
     
@@ -146,5 +147,29 @@ extension MKPlacemark {
             guard let administrativeArea = administrativeArea else { return "" }
             return "\(subThoroughfare) \(thoroughfare), \(locality), \(administrativeArea)"
         }
+    }
+}
+
+extension MKMapView {
+    /*
+     -  create MKMapRect
+     -  create MKMapPoint
+     -  create MKMapRect
+     -  union on zoomRect
+     -  add on UIEdgeInset
+    -   setVisible MapRect
+     */
+    func zoomToFit(annotations: [MKAnnotation]) {
+        guard annotations.count > 0 else { return }
+        
+        var zoomRect = MKMapRect.null
+        
+        for annotation in annotations {
+            let annotationPoint = MKMapPoint(annotation.coordinate)
+            let pointRect = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0, height: 0)
+            zoomRect = zoomRect.union(pointRect)
+        }
+        
+        setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 350, right: 100), animated: true)
     }
 }

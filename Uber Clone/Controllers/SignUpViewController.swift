@@ -120,6 +120,13 @@ class SignUpViewController: UIViewController {
                            "fullname": username,
                            "accountType": accountTypeIndex] as [String : Any]
             
+            /*
+                Handle driver sign up
+             -  get location
+             -  initiate GeoFire REF
+             -  Geo Fire
+             
+             */
             if accountTypeIndex == 1 {
                 let locationManager = LocationHandler.shared.locationManager
                 let location = locationManager?.location

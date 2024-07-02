@@ -6,11 +6,3 @@ struct FileNames {
     static let emailImage = "ic_mail_outline_white_2x"
     static let passwordImage = "ic_lock_outline_white_2x"
 }
-
-
-//{
-//  "rules": {
-//    ".read": "now < 1716048000000",  // 2024-5-19
-//    ".write": "now < 1716048000000",  // 2024-5-19
-//  }
-//}
