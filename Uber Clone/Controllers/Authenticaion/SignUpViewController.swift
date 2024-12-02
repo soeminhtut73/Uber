@@ -75,7 +75,7 @@ class SignUpViewController: UIViewController {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)
         ])
         
-        var goBackTitle = NSAttributedString(string: " Click Here:", attributes: [NSAttributedString.Key.foregroundColor : UIColor.link])
+        var goBackTitle = NSAttributedString(string: " Click Here.", attributes: [NSAttributedString.Key.foregroundColor : UIColor.link])
         attributeTitle.append(goBackTitle)
         
         btn.setAttributedTitle(attributeTitle, for: .normal)

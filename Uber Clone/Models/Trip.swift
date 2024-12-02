@@ -7,6 +7,7 @@ enum TripState: Int {
     case inProgress // 3
     case arriveAtDestination // 4
     case completed // 5
+    case denied // 6
 }
 
 struct Trip {

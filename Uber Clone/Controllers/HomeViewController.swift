@@ -191,6 +191,20 @@ class HomeViewController: UIViewController {
                     self.locationInputActivationView.alpha = 1
                     self.presentAlertController(withTitle: "Trip Completed!", withMessage: "We hope you enjoy the trip!")
                 }
+                
+            case .denied:
+                self.shouldPresentLoadingView(false)
+                self.presentAlertController(withTitle: "Oops!", withMessage: "We couldn't find a driver for you at this time.")
+                
+                PassengerService.shared.deleteTrip { error, ref in
+                    if error == nil {
+                        self.centerOnUserLocation()
+                        self.configureActionButton(config: .showMenu)
+                        self.locationInputActivationView.alpha = 1
+                        self.removeAnnotationAndOverlays()
+                    }
+                }
+                
             }
         }
     }

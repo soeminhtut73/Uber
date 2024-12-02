@@ -15,6 +15,10 @@ struct User {
     var homeLocation: String?
     var workLocation: String?
     
+    var firstLetter: String {
+        return String(fullname.prefix(1))
+    }
+    
     init(uID: String, user: [String: Any]) {
         
         self.fullname = user["fullname"] as? String ?? "Undefined"
