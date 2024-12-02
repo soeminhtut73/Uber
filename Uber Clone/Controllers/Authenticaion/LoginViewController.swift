@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
     @objc func handleLoginButton() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        print("got login btn tap")
+        print("Log in button got tap")
         
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -96,7 +96,7 @@ class LoginViewController: UIViewController {
                 return
             }
             print("Successfully Login User")
-            self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            self.navigationController?.pushViewController(ContainerController(), animated: true)
             
         }
     }
@@ -152,7 +152,8 @@ class LoginViewController: UIViewController {
             configureUI()
         } else {
             print("User login.")
-            navigationController?.pushViewController(HomeViewController(), animated: true)
+//            navigationController?.pushViewController(HomeViewController(), animated: true)
+            navigationController?.pushViewController(ContainerController(), animated: true)
         }
     }
     

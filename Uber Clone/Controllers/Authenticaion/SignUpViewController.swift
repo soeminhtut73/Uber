@@ -144,7 +144,7 @@ class SignUpViewController: UIViewController {
             
             self.createUserData(uId: uId, values: values)
             
-            self.navigationController?.pushViewController(HomeViewController(), animated: true)
+            self.navigationController?.pushViewController(ContainerController(), animated: true)
             
             print("Sign Up Success")
             

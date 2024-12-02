@@ -8,11 +8,24 @@ protocol PickupControllerDelegate {
 class PickupController: UIViewController {
     
     //MARK: - Properties
-    private let mapView = MKMapView()
-    
-    private var trip: Trip
     
     var delegate: PickupControllerDelegate?
+    private let mapView = MKMapView()
+    private var trip: Trip
+    
+    private lazy var circularProgressView: CircularProgressView = {
+        let frame = CGRect(x: 0, y: 0, width: 268, height: 268)
+        let cp = CircularProgressView(frame: frame)
+        
+        // configure mapView in circularProgressView
+        cp.addSubview(mapView)
+        mapView.dimension(width: 265, height: 265)
+        mapView.layer.cornerRadius = 268 / 2
+        mapView.centerX(inView: cp)
+        mapView.centerY(inView: cp, constant: 32)
+        
+        return cp
+    }()
     
     private let cancelButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -44,7 +57,7 @@ class PickupController: UIViewController {
         self.trip = trip
         super.init(nibName: nil, bundle: nil)
     }
-    
+             
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -53,6 +66,8 @@ class PickupController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureMapView()
+        
+        self.perform(#selector(animateProgress), with: nil, afterDelay: 0.5)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -65,8 +80,15 @@ class PickupController: UIViewController {
     }
     
     @objc func handleAcceptTripButton() {
-        Service.shared.acceptTrip(trip) { error, ref in
+        DriverService.shared.acceptTrip(trip) { error, ref in
             self.delegate?.didAcceptTrip(trip: self.trip)
+        }
+    }
+    
+    @objc func animateProgress() {
+        circularProgressView.animatePulsatingLayer()
+        circularProgressView.setProgressWithAnimation(value: 0, duration:20) {
+//            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -91,15 +113,20 @@ class PickupController: UIViewController {
         view.addSubview(cancelButton)
         cancelButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingLeft: 16)
         
-        view.addSubview(mapView)
-        mapView.dimension(width: 270, height: 270)
-        mapView.layer.cornerRadius = 270/2
-        mapView.centerX(inView: view)
-        mapView.centerY(inView: view, constant: -200)
+//        view.addSubview(mapView)
+//        mapView.dimension(width: 270, height: 270)
+//        mapView.layer.cornerRadius = 270/2
+//        mapView.centerX(inView: view)
+//        mapView.centerY(inView: view, constant: -200)
+        
+        view.addSubview(circularProgressView)
+        circularProgressView.dimension(width: 268, height: 268)
+        circularProgressView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        circularProgressView.centerX(inView: view)
         
         view.addSubview(pickupLabel)
         pickupLabel.centerX(inView: view)
-        pickupLabel.anchor(top: mapView.bottomAnchor, paddingTop: 16)
+        pickupLabel.anchor(top: circularProgressView.bottomAnchor, paddingTop: 80)
         
         view.addSubview(acceptTipButton)
         acceptTipButton.centerX(inView: view)

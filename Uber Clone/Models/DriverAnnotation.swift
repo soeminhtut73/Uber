@@ -1,6 +1,6 @@
 import MapKit
 
-class DriverAnnotation:NSObject, MKAnnotation {
+class DriverAnnotation: NSObject, MKAnnotation {
     dynamic var coordinate: CLLocationCoordinate2D
     var uID: String
     

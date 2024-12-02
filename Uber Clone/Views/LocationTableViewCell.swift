@@ -13,6 +13,7 @@ class LocationTableViewCell: UITableViewCell {
     //MARK: - Properties
     static let identifier = "LocationTableViewCell"
     
+    // Placemark for search results
     var placemark: MKPlacemark? {
         didSet {
             titleLabel.text = placemark?.name
@@ -20,13 +21,20 @@ class LocationTableViewCell: UITableViewCell {
         }
     }
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()   
+    var locationType: LocationType? {
+        didSet {
+            titleLabel.text = locationType?.description
+            addressLabel.text = locationType?.subTitle
+        }
+    }
+    
+    public let titleLabel: UILabel = {
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     
-    private let addressLabel: UILabel = {
+    public let addressLabel: UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
         label.font = UIFont.systemFont(ofSize: 14)

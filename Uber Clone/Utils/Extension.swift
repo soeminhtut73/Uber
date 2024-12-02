@@ -157,7 +157,7 @@ extension MKMapView {
      -  create MKMapRect
      -  union on zoomRect
      -  add on UIEdgeInset
-    -   setVisible MapRect
+     -  setVisible MapRect
      */
     func zoomToFit(annotations: [MKAnnotation]) {
         guard annotations.count > 0 else { return }
@@ -171,5 +171,68 @@ extension MKMapView {
         }
         
         setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 350, right: 100), animated: true)
+    }
+    
+    /*
+     -  add annotation for placemark coordinate
+     -  selectAnnotation
+     */
+    func addAnnotationAndSelect(forCoordinate coordinate: CLLocationCoordinate2D) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        addAnnotation(annotation)
+        selectAnnotation(annotation, animated: true)
+    }
+}
+
+extension UIViewController {
+    func presentAlertController(withTitle title: String, withMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    func shouldPresentLoadingView(_ present: Bool, message: String? = nil) {
+        if present {
+            let loadingView = UIView()
+            loadingView.backgroundColor = .black
+            loadingView.frame = view.bounds
+            loadingView.alpha = 0
+            loadingView.tag = 1
+            
+            let indicator = UIActivityIndicatorView()
+            indicator.style = UIActivityIndicatorView.Style.medium
+            indicator.color = .white
+            indicator.center = view.center
+            
+            let label = UILabel()
+            label.text = message
+            label.font = UIFont.systemFont(ofSize: 20)
+            label.textColor = .white
+            label.alpha = 0.8
+            
+            view.addSubview(loadingView)
+            loadingView.addSubview(indicator)
+            loadingView.addSubview(label)
+            
+            label.centerX(inView: view)
+            label.anchor(top: indicator.bottomAnchor, paddingTop: 32)
+            
+            UIView.animate(withDuration: 0.3) {
+                loadingView.alpha = 0.7
+                indicator.startAnimating()
+            }
+        } else {
+            view.subviews.forEach { subview in
+                if subview.tag == 1 {
+                    UIView.animate(withDuration: 0.3) {
+                        subview.alpha = 0
+                    } completion: { _ in
+                        subview.removeFromSuperview()
+                    }
+
+                }
+            }
+        }
     }
 }
